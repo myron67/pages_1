@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body{
+      margin:0;
+      height:100vh;
+      background:#0a0a0a;
+      font-family:monospace;
+      color:#eaeaea;
+      overflow:hidden;
+    }
+
+    .card{
+      position:absolute;
+      top:0;
+      left:0;
+
+      width:260px;
+      padding:20px;
+      background:#111;
+      border-radius:5px;
+      will-change: transform;
+    }
+
+    img{
+      width:100%;
+      border-radius:0px;
+      display:block;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <img src="./2025.jpg">
+</div>
+
+<script>
+
+  const card = document.getElementById("card");
+
+  let angle = 0.78 //Math.PI/4 //0;//45*(Math.PI/180);
+
+  let spd = 1.2;
+
+  let x = 0;
+  let y = 0;
+
+
+  let vx = Math.cos(angle) * spd
+  let vy = Math.sin(angle) * spd
+
+          /* addEventListener("mousedown", (e) => {
+    const w = card.offsetWidth
+    const h = card.offsetHeight
+
+    angle = Math.atan2(e.clientY - (y+h/2), e.clientX - (x+w/2))
+
+    vx = Math.cos(angle)
+    vy = Math.sin(angle)
+
+  })*/
+ // let iter_to_swap = 10;
+
+  setInterval(() => {
+
+    const w = card.offsetWidth
+    const h = card.offsetHeight
+
+    x += (vx*spd)
+    y += (vy*spd)
+
+   // if (iter_to_swap > 10) {
+      if (x <= 0 || x >= window.innerWidth - w) {
+        vx = -vx
+   //     iter_to_swap = 0
+      }
+
+      if (y <= 0 || y >= window.innerHeight - h) {
+        vy = -vy
+      //  iter_to_swap = 0
+      }
+   // }
+ //   iter_to_swap++;
+    card.style.transform = `translate(${x}px, ${y}px)`
+
+  }, 0)
+
+ // function clamp(x,min,max){
+//    return Math.min(Math.max(x,min),max)
+ // }
+</script>
+
+</body>
+</html>
